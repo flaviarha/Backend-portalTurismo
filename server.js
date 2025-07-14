@@ -1,19 +1,25 @@
-// Importa o Express
-const express = require('express');
+const sequelize = require('./config/db');
+require('dotenv').config();
+const express = require('express')
  
-// Cria uma instância do Express
+const userRoutes = require('./routes/userRoutes')
+ 
 const app = express();
  
-// Define uma porta (padrão: 3000)
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
  
-// Rota de teste (GET /)
-app.get('/', (req, res) => {
-  res.send('🚀 Servidor Express está funcionando!');
-});
+app.get('/', (req, res)=> res.send('api funcionando'))
  
-// Inicia o servidor
-app.listen(PORT, () => {
-  console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
-});
+app.use('/api/users', userRoutes)
  
+const PORT = process.env.PORT;
+ 
+sequelize.authenticate()
+  .then(() => {
+    console.log('servidor online e conectado com o DB')
+    return sequelize.sync();
+  })
+  .then(() =>{
+    console.log('banco de dados sincronizado')
+    app.listen(PORT, () => console.log("SERVIDOR RODANDO NA PORTA: " + PORT))
+  }).catch(erro => console.log("Erro interno do servidor", erro))
