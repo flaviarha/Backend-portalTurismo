@@ -1,13 +1,11 @@
-//CODIGO DA PASTA MODELS AQUIVO USER.js
- 
 // Importa o tipo de dados do Sequelize
 const { DataTypes } = require('sequelize');
  
 // Importa a instância configurada do Sequelize (conexão com o banco de dados)
 const sequelize = require('../config/db');
  
-// Define o modelo de Usuário (User)
-const User = sequelize.define('User', {
+// Define o modelo de Contato (Contact)
+const Contact = sequelize.define('Contact', {
   // Campo ID: chave primária, número inteiro e autoincrementável
   id: {
     type: DataTypes.INTEGER,       // Tipo número inteiro
@@ -25,24 +23,22 @@ const User = sequelize.define('User', {
   email: {
     type: DataTypes.STRING,        // Texto simples
     allowNull: false,              // Obrigatório
-    unique: true,                  // Deve ser único no banco (não permite dois iguais)
   },
  
-  // Campo senha do usuário
-  password: {
-    type: DataTypes.STRING,        // A senha será armazenada como string (hash)
+  // Campo mensagem
+  message: {
+    type: DataTypes.TEXT,        // A senha será armazenada como string (hash)
     allowNull: false,              // Campo obrigatório
   }
  
 }, {
   // Configurações adicionais do modelo
  
-  tableName: 'users',              // Nome da tabela no banco de dados (evita plural automático)
+  tableName: 'contact',              // Nome da tabela no banco de dados (evita plural automático)
  
   timestamps: true,                // Cria automaticamente os campos createdAt e updatedAt
 });
  
 // Exporta o modelo para ser utilizado em outras partes da aplicação
-module.exports = User;
- 
+module.exports = Contact;
  
