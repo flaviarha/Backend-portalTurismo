@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 //const authMiddleware = require('../middlewares/authMiddleware');
  
-const User = require('../models/Users');
+const User = require('../models/users');
 //const { default: ModelManager } = require('sequelize/types/model-manager');
  
 // ✅ Criar usuário (registro) — público
